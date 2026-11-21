@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="app-container">
+        <header class="header">
+            <div class="brand">
+                <span class="brand-icon">☀</span>
+                <h1>Weatherly</h1>
+            </div>
+            <p>Weather updates, made simple.</p>
+        </header>
+
+        <section class="weather-card">
+            <h2>Check the Weather</h2>
+            <p class="subtitle">Discover the weather in your city</p>
+
+            <form id="weatherForm" class="search-box">
+                <input
+                    type="text"
+                    id="cityInput"
+                    placeholder="Enter city name..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" id="searchBtn">Search</button>
+            </form>
+
+            <p id="message" class="message">
+                Enter a city to see its weather.
+            </p>
+
+            <div id="weatherResult" class="weather-result hidden">
+                <h3 id="cityName">City Name</h3>
+                <div class="weather-main">
+                    <img id="weatherIcon" src="" alt="Weather icon">
+                    <div>
+                        <p id="temperature">--°C</p>
+                        <p id="weatherDescription">Weather condition</p>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail">
+                        <span>💧</span>
+                        <p>Humidity</p>
+                        <strong id="humidity">--%</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>💨</span>
+                        <p>Wind Speed</p>
+                        <strong id="windSpeed">-- m/s</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Powered by OpenWeatherMap API</p>
+            <p>Made with ☁️ and curiosity.</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
