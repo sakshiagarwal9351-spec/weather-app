@@ -1,6 +1,4 @@
 
-const API_KEY = d54d79344ca0fb2f758eeaceaabeab74;
-
 const weatherForm = document.getElementById("weatherForm");
 const cityInput = document.getElementById("cityInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -17,24 +15,20 @@ weatherForm.addEventListener("submit", async function (event) {
         return;
     }
 
-    if (API_KEY === "YOUR_API_KEY_HERE") {
-        showMessage("Please configure your OpenWeatherMap API key first.", true);
-        return;
-    }
-
     searchBtn.disabled = true;
     searchBtn.textContent = "Loading...";
     weatherResult.classList.add("hidden");
     showMessage("Fetching weather information...", false);
 
     try {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
+        const response = await fetch(
+            `/api/weather?city=${encodeURIComponent(city)}`
+        );
 
-        const response = await fetch(url);
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.message || "Unable to fetch weather.");
+            throw new Error(data.error || "Unable to fetch weather.");
         }
 
         document.getElementById("cityName").textContent =
@@ -64,12 +58,7 @@ weatherForm.addEventListener("submit", async function (event) {
         showMessage("Weather updated successfully!", false);
 
     } catch (error) {
-        showMessage(
-            error.message === "city not found"
-                ? "City not found. Please check the spelling."
-                : error.message,
-            true
-        );
+        showMessage(error.message, true);
     } finally {
         searchBtn.disabled = false;
         searchBtn.textContent = "Search";
@@ -80,3 +69,4 @@ function showMessage(text, isError) {
     message.textContent = text;
     message.classList.toggle("error", isError);
 }
+
